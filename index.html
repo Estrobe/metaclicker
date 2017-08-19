@@ -96,7 +96,7 @@ setInterval(function renderCoins() {
 	document.getElementById("coins").innerHTML = "COINS: " + Math.round(coins);
 }, 10)
 setInterval(function renderCps() {
-	document.getElementById("cps").innerHTML = "CPS: " + cps;
+	document.getElementById("cps").innerHTML = "CPS: " + cps.toFixed(1);
 })
  
 function gainCpsOne() {
