@@ -43,8 +43,7 @@
             .button:active .content {
                 bottom: 0;
                 box-shadow: 0 0 0 #06c;
-            }
-            
+            }			
         </style>
 <title>MetaMasters CC</title>
 </head>
@@ -115,6 +114,6 @@ setInterval(function coinsPerSec() {
 
 
 </script>
-<button button type="button" onclick="gainFiveCps()">5CPS</button>
+<button button type="button" onclick="gainFiveCps()" style="000000">5CPS</button>
 </body>
 </html>
