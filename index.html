@@ -18,6 +18,9 @@
 				font-size: 20px;
             }
             
+	    div.topbar {
+		    background-color: rgba(125, 125, 125, 0.5)
+	}
             .button {
                 display: block;
                 width: 180px;
@@ -52,7 +55,7 @@
 <title>MetaMasters CC</title>
 </head>
 <header>
-<center><h1 style="margin-top: 30px;text-shadow: 0 1px 0 #ccc,
+<center><div class=topbar><h1 style="margin-top: 30px;text-shadow: 0 1px 0 #ccc,
                0 2px 0 #c9c9c9,
                0 3px 0 #bbb,
                0 4px 0 #b9b9b9,
@@ -77,7 +80,7 @@
                0 10px 10px rgba(0,0,0,.2),
                0 20px 20px rgba(0,0,0,.15);color: #ffffff" id="cps"></h6></center>
 </header>
-
+	</div>
 <body>
         <a href="#" class="button" onclick="gainCoin()">
             <span class="content">Click me</span>
@@ -114,9 +117,6 @@ function gainFiveCps() {
 setInterval(function coinsPerSec() {
 	coins += cps;
 }, 1000)
-
-
-
 </script>
 <button button type="button" onclick="gainFiveCps()" style="000000">5CPS</button>
 </body>
