@@ -67,7 +67,7 @@
                0 3px 5px rgba(0,0,0,.2),
                0 5px 10px rgba(0,0,0,.25),
                0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);color: #ffffff" id="coins"></h1	></center>
+               0 20px 20px rgba(0,0,0,.15);color: #ffffff" id="coins"></h1></center>
 <center><h4 style="margin-top: 10px;text-shadow: 0 1px 0 #ccc,
                0 2px 0 #c9c9c9,
                0 3px 0 #bbb,
@@ -79,7 +79,19 @@
                0 3px 5px rgba(0,0,0,.2),
                0 5px 10px rgba(0,0,0,.25),
                0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);color: #ffffff" id="cps"></h6></center>
+               0 20px 20px rgba(0,0,0,.15);color: #ffffff" id="cps"></h4></center>
+<center><h4 style="margin-bottom: 30px;text-shadow: 0 1px 0 #ccc,
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);color: #ffffff;" id="cpc"></h4></center>
 </header>
 	</div>
 <body>
@@ -92,14 +104,21 @@ var cps = 0;
 var cpc = 1;
 var costPS = 20;
 var costPC = 100;
+var clicked = 0;
+var adminAtt = 0;
+
 function gainCoin() {
 	coins += cpc;
+	clicked += 1;
 }
 setInterval(function renderCoins() {
 	document.getElementById("coins").innerHTML = "COINS: " + Math.round(coins);
 }, 10)
 setInterval(function renderCps() {
 	document.getElementById("cps").innerHTML = "CPS: " + cps.toFixed(1);
+})
+setInterval(function renderCpc() {
+	document.getElementById("cpc").innerHTML = "CPC: " + Math.round(cpc);
 })
  
 function gainCpsOne() {
@@ -153,9 +172,13 @@ function adminPrompt() {
 	}
 	else {
 		coins += 0
+		adminAtt += 1;
 	}
 }
 
+function statsOpen() {
+	alert('Coins clicked: ' + clicked + '\nAdmin Attempts: ' + adminAtt)
+}
 </script>
 <button button type="button" onclick="gainCpsOne()" style="background-color: #00ced1;
     border: none;
@@ -185,6 +208,14 @@ function adminPrompt() {
     display: inline-block;
     font-size: 16px;border: 2px solid #00ffff;float: right;">Admin Console</button>
 	
+	<button button type="button" onclick="statsOpen()" style="background-color: #00dfc2;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;border: 2px solid #00ffff;float: right;margin-right: 5px">Stats</button>
 	
 </body>
 </html>
