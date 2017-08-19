@@ -89,6 +89,7 @@ var coins = 0;
 var cps = 0;
 var cpc = 1;
 var costPS = 20;
+var costPC = 100;
 function gainCoin() {
 	coins += cpc;
 }
@@ -110,17 +111,78 @@ function gainCpsOne() {
 		alert("You do not have enough coins to buy this");
 	}
 } 
+
+function gainCpcOne() {
+	if (coins >= costPC) {
+		cpc += 1
+		coins -= costPC
+		costPC *= 1.1
+		
+	}
+	else {
+		alert("You do not have enough coins to buy this");
+	}
+} 
+
 setInterval(function coinsPerSec() {
 	coins += cps;
 }, 1000)
+
+function adminPrompt() {
+	var password = prompt("Admin Password:")
+	if (password === 'EsTrasia_05') {
+		var addWhat = prompt("10KCOIN or 100KCOIN or 10CPC or 100CPC")
+		if (addWhat === '10KCOIN') {
+			coins += 10000;
+			}
+		else if (addWhat === '100KCOIN') {
+			coins += 100000;
+		}
+		else if (addWhat === '10CPC') {
+			cpc += 10;
+		}
+		else if (addWhat === '100CPC') {
+			cpc += 100;
+		}
+		else {
+			cpc += 0;
+		}
+		
+	}
+	else {
+		coins += 0
+	}
+}
+
 </script>
-<header><center><button button type="button" onclick="gainCpsOne()" style="background-color: #00ced1;
+<button button type="button" onclick="gainCpsOne()" style="background-color: #00ced1;
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;border: 2px solid #00ffff;">+0.1CPS</button><center></header>
+    font-size: 16px;border: 2px solid #00ffff;">+0.1CPS</button>
+
+
+	<button button type="button" onclick="gainCpcOne()" style="background-color: #00ced1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;border: 2px solid #00ffff;">+1.0CPC</button>
+	
+		<button button type="button" onclick="adminPrompt()" style="background-color: #00dfc2;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;border: 2px solid #00ffff;float: right;">Admin Console</button>
+	
+	
 </body>
 </html>
