@@ -6,7 +6,6 @@
 <style type="text/css">
         
 		@import url('https://fonts.googleapis.com/css?family=Saira+Semi+Condensed');
-
 		
             * {
                 margin: 0;
@@ -19,9 +18,7 @@
             }
             
 	    div.topbar {
-		    background-color: rgba(125, 125, 255, 0.5);
-	            border-top: rgba(125, 125, 255, 0.8);
-		    border-bottom: rgba(125, 125, 255, 0.8);
+		    background-color: rgb(125, 125, 125)
 	}
             .button {
                 display: block;
@@ -91,42 +88,39 @@
 var coins = 0;
 var cps = 0;
 var cpc = 1;
-var costPS = 50;
-
+var costPS = 20;
 function gainCoin() {
 	coins += cpc;
 }
 setInterval(function renderCoins() {
 	document.getElementById("coins").innerHTML = "COINS: " + Math.round(coins);
 }, 10)
-
 setInterval(function renderCps() {
 	document.getElementById("cps").innerHTML = "CPS: " + cps;
 })
  
-function gainFiveCps() {
+function gainCpsOne() {
 	if (coins >= costPS) {
-		cps += 5
+		cps += 0.1
 		coins -= costPS
-		costPS *= 1.10
+		costPS *= 1.01
 		
 	}
 	else {
 		alert("You do not have enough coins to buy this");
 	}
 } 
-
 setInterval(function coinsPerSec() {
 	coins += cps;
 }, 1000)
 </script>
-<header><center><button button type="button" onclick="gainFiveCps()" style="background-color: #00ced1;
+<header><center><button button type="button" onclick="gainCpsOne()" style="background-color: #00ced1;
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;border: 2px solid #00ffff;">5CPS</button><center></header>
+    font-size: 16px;border: 2px solid #00ffff;">+0.1CPS</button><center></header>
 </body>
 </html>
