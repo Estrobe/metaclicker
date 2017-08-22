@@ -19,8 +19,8 @@
             
 	    div.topbar {
 		    		    background-color: rgba(125, 125, 255, 0.5);
- 	            border-top: rgba(125, 125, 255, 0.8);
- 		    border-bottom: rgba(125, 125, 255, 0.8);
+ 	            border-top: rgba(140, 125, 255, 0.8);
+ 		    border-bottom: rgba(140, 125, 255, 0.8);
 	}
             .button {
                 display: block;
@@ -94,7 +94,7 @@
                0 20px 20px rgba(0,0,0,.15);color: #ffffff;" id="cpc"></h4></center>
 </header>
 	</div>
-<body>
+<body onload="checkCookie()">
         <a href="#" class="button" onclick="gainCoin()">
             <span class="content">Click me</span>
         </a>
@@ -106,11 +106,50 @@ var costPS = 20;
 var costPC = 100;
 var clicked = 0;
 var adminAtt = 0;
+var costPS2 = 150;
+var costPC2 = 800;
 
 function gainCoin() {
 	coins += cpc;
 	clicked += 1;
 }
+
+// Start of cookies
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+            setCookie("username", user, 365);
+        }
+    }
+}
+// End of cookies
+
 setInterval(function renderCoins() {
 	document.getElementById("coins").innerHTML = "COINS: " + Math.round(coins);
 }, 10)
@@ -129,7 +168,7 @@ function gainCpsOne() {
 		
 	}
 	else {
-		alert("You do not have enough coins to buy this");
+		alert("You need " + costPS + " coins to buy this");
 	}
 } 
 
@@ -141,9 +180,35 @@ function gainCpcOne() {
 		
 	}
 	else {
-		alert("You do not have enough coins to buy this");
+		alert("You need " + Math.round(costPC) + " coins to buy this");
 	}
 } 
+
+function gainCpcTwo() {
+	if (coins >= costPC2) {
+		cpc += 10
+		coins -= costPC2
+		costPC2 *= 1.1
+		
+	}
+	else {
+		alert("You need " + Math.round(costPC2) + " coins to buy this");
+	}
+} 
+
+function gainCpsTwo() {
+	if (coins >= costPS2) {
+		cps += 1.0
+		coins -= costPS2
+		costPS *= 1.05 
+		
+	}
+	else {
+		alert("You need " + Math.round(costPS2) + " coins to buy this");
+	}
+} 
+
+
 
 setInterval(function coinsPerSec() {
 	coins += cps;
@@ -189,7 +254,15 @@ function statsOpen() {
     display: inline-block;
     font-size: 16px;border: 2px solid #00ffff;">+0.1CPS</button>
 
-
+	<button button type="button" onclick="gainCpsTwo()" style="background-color: #00ced1;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align:center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;border: 2px solid #00ffff;">+1.0CPS</button>
+	
 	<button button type="button" onclick="gainCpcOne()" style="background-color: #00ced1;
     border: none;
     color: white;
@@ -198,6 +271,15 @@ function statsOpen() {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;border: 2px solid #00ffff;">+1.0CPC</button>
+	
+		<button button type="button" onclick="gainCpcTwo()" style="background-color: #00ced1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;border: 2px solid #00ffff;">+10.0CPC</button>
 	
 		<button button type="button" onclick="adminPrompt()" style="background-color: #00dfc2;
     border: none;
@@ -216,6 +298,7 @@ function statsOpen() {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;border: 2px solid #00ffff;float: right;margin-right: 5px">Stats</button>
+	
 	
 </body>
 </html>
